@@ -1,5 +1,5 @@
 from collections import defaultdict
-
+import numpy as np
 
 class MarkovText(object):
 
@@ -40,7 +40,9 @@ class MarkovText(object):
         for _ in range(term_count - 1):
             next_terms = self.term_dict.get(current)
             if not next_terms:
-                break
+                current = np.random.choice(list(self.term_dict.keys()))
+            else:
+                current = np.random.choice(next_terms)
 
             current = np.random.choice(next_terms)
             generated.append(current)
